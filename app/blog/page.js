@@ -54,10 +54,10 @@ const blogPosts = [
 
 export default function BlogPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">KICKSTEP Blog</h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div className="text-center mb-8 sm:mb-12">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4">KICKSTEP Blog</h1>
+        <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
           Stay updated with the latest trends, tips, and insights in corporate apparel and uniform solutions.
         </p>
       </div>
@@ -65,7 +65,7 @@ export default function BlogPage() {
       {/* Featured Post */}
       <div className="mb-12">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="grid md:grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             <Image 
               src={blogPosts[0].image}
               alt={blogPosts[0].title}
@@ -81,7 +81,8 @@ export default function BlogPage() {
               <p className="text-gray-600 mb-4">{blogPosts[0].excerpt}</p>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">{blogPosts[0].date}</span>
-                <Link href={`/blog/${blogPosts[0].id}`} className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                <Link href={`/blog/${blogPosts[0].id}`} className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  <span className="mr-2">👁</span>
                   Read More
                 </Link>
               </div>
@@ -91,7 +92,7 @@ export default function BlogPage() {
       </div>
 
       {/* Blog Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {blogPosts.slice(1).map((post) => (
           <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
             <Image 
@@ -109,8 +110,9 @@ export default function BlogPage() {
               <p className="text-gray-600 mb-4">{post.excerpt}</p>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">{post.date}</span>
-                <Link href={`/blog/${post.id}`} className="text-primary hover:text-blue-700 font-semibold">
-                  Read More →
+                <Link href={`/blog/${post.id}`} className="inline-flex items-center text-blue-600 hover:text-purple-600 font-bold transition-colors">
+                  Read More
+                  <span className="ml-2">→</span>
                 </Link>
               </div>
             </div>
@@ -128,7 +130,7 @@ export default function BlogPage() {
             placeholder="Enter your email"
             className="flex-1 px-4 py-3 rounded-l-lg text-black focus:outline-none"
           />
-          <button className="bg-secondary text-black px-6 py-3 rounded-r-lg hover:bg-yellow-500 transition-colors">
+          <button className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black px-8 py-3 rounded-r-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
             Subscribe
           </button>
         </div>
