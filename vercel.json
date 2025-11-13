@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd fronted && npm run build",
+  "outputDirectory": "fronted/.next",
+  "installCommand": "cd fronted && npm install"
+}
