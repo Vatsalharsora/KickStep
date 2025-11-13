@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaBars, FaTimes, FaShoppingBag, FaUser, FaGlobe, FaPhone, FaWhatsapp, FaSearch, FaHome, FaInfoCircle, FaBlog, FaEnvelope, FaHeadset } from 'react-icons/fa'
+import AuthModal from './AuthModal'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -10,6 +11,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [showAuthModal, setShowAuthModal] = useState(false)
 
   useEffect(() => {
     const updateCartCount = () => {
@@ -118,34 +120,32 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Search Bar */}
-            <div className="hidden lg:flex items-center">
+            {/* Search Bar & Desktop Actions */}
+            <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
               {showSearch ? (
-                <form onSubmit={handleSearch} className="flex items-center bg-gray-100 rounded-full px-4 py-2 mr-4">
+                <form onSubmit={handleSearch} className="flex items-center bg-gray-100 rounded-full px-4 py-2">
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
-                    className="bg-transparent outline-none text-gray-700 placeholder-gray-500 w-48"
+                    className="bg-transparent outline-none text-gray-700 placeholder-gray-500 w-32"
                     autoFocus
+                    onBlur={() => !searchQuery && setShowSearch(false)}
                   />
-                  <button type="submit" className="text-blue-600 hover:text-blue-800">
+                  <button type="submit" className="text-blue-600 hover:text-blue-800 ml-2">
                     <FaSearch />
                   </button>
                 </form>
               ) : (
                 <button
                   onClick={() => setShowSearch(true)}
-                  className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all mr-4"
+                  className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all"
                 >
                   <FaSearch />
                 </button>
               )}
-            </div>
-
-            {/* Desktop Actions */}
-            <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
+              
               <Link href="/cart" className="group relative p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
                 <FaShoppingBag className="text-xl group-hover:scale-110 transition-transform" />
                 {cartCount > 0 && (
@@ -155,11 +155,11 @@ export default function Navbar() {
                 )}
               </Link>
               
-              <Link href="/auth/login" className="group p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
+              <button onClick={() => setShowAuthModal(true)} className="group p-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
                 <FaUser className="text-xl group-hover:scale-110 transition-transform" />
-              </Link>
+              </button>
               
-              <Link href="/contact" className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+              <Link href="/contact" className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap">
                 <span className="flex items-center">
                   <FaPhone className="mr-2" style={{transform: 'scaleX(-1)'}} />
                   Get Quote
@@ -241,14 +241,13 @@ export default function Navbar() {
                     )}
                   </Link>
                   
-                  <Link 
-                    href="/auth/login" 
-                    className="flex items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-xl transition-all mb-4"
-                    onClick={() => setIsOpen(false)}
+                  <button 
+                    onClick={() => { setShowAuthModal(true); setIsOpen(false); }}
+                    className="flex items-center p-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-xl transition-all mb-4 w-full"
                   >
                     <FaUser className="mr-3" />
                     <span className="font-medium">Login</span>
-                  </Link>
+                  </button>
                   
                   <Link 
                     href="/contact" 
@@ -264,6 +263,12 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+      
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)} 
+        initialMode="login" 
+      />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import './globals.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import WhatsAppFloat from './components/WhatsAppFloat'
 
 export const metadata = {
   title: 'KICKSTEP - Premium Corporate T-Shirts & Uniforms',
@@ -16,7 +15,6 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="pt-24">{children}</main>
         <Footer />
-        <WhatsAppFloat />
       </body>
     </html>
   )

@@ -17,7 +17,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative bg-gradient-to-br from-blue-50 via-white to-gray-100 text-gray-800 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-blue-50 via-white to-gray-100 text-gray-800 overflow-hidden mb-0">
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 animate-pulse"></div>
@@ -44,12 +44,12 @@ export default function Footer() {
         </div>
 
         {/* Main Footer Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 pt-12 sm:pt-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 pt-6 sm:pt-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
-              <div className="group mb-6">
-                <div className="mb-6">
+              <div className="group mb-3">
+                <div className="mb-3">
                   <Image 
                     src="/kickStepLogo.svg" 
                     alt="KICKSTEP - Global Corporate Apparel" 
@@ -60,21 +60,21 @@ export default function Footer() {
                 </div>
               </div>
               
-              <p className="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+              <p className="text-gray-600 mb-3 sm:mb-4 leading-relaxed text-xs sm:text-sm">
                 Elevating corporate identity worldwide through premium t-shirts and uniforms. 
                 Trusted by 500+ companies across 25+ countries.
               </p>
               
               {/* Global Stats */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
-                <div className="bg-blue-50 backdrop-blur-sm p-4 rounded-xl border border-blue-200">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="bg-blue-50 backdrop-blur-sm p-2 sm:p-3 rounded-xl border border-blue-200">
                   <div className="flex items-center mb-1 sm:mb-2">
                     <FaGlobe className="text-blue-600 mr-1 sm:mr-2 text-sm" />
                     <span className="text-lg sm:text-2xl font-bold text-gray-800">25+</span>
                   </div>
                   <p className="text-gray-600 text-xs sm:text-sm">Countries Served</p>
                 </div>
-                <div className="bg-purple-50 backdrop-blur-sm p-4 rounded-xl border border-purple-200">
+                <div className="bg-purple-50 backdrop-blur-sm p-2 sm:p-3 rounded-xl border border-purple-200">
                   <div className="flex items-center mb-1 sm:mb-2">
                     <FaAward className="text-purple-600 mr-1 sm:mr-2 text-sm" />
                     <span className="text-lg sm:text-2xl font-bold text-gray-800">500+</span>
@@ -85,7 +85,7 @@ export default function Footer() {
               
               {/* Newsletter */}
               <div className="bg-gradient-to-r from-blue-100 to-purple-100 backdrop-blur-sm p-3 sm:p-4 rounded-2xl border border-blue-200">
-                <h4 className="font-bold mb-2 sm:mb-3 text-lg sm:text-xl flex items-center text-gray-800">
+                <h4 className="font-bold mb-2 sm:mb-3 text-sm sm:text-base flex items-center text-gray-800">
                   <span className="mr-2">🌍</span> Global Updates
                 </h4>
                 <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4">Join 10,000+ subscribers worldwide</p>
@@ -110,7 +110,7 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-gray-800 flex items-center">
+              <h4 className="text-sm sm:text-base font-bold mb-4 sm:mb-6 text-gray-800 flex items-center">
                 <span className="w-1 h-4 sm:h-6 bg-gradient-to-b from-blue-400 to-purple-400 rounded-full mr-2 sm:mr-3"></span>
                 Quick Links
               </h4>
@@ -129,7 +129,7 @@ export default function Footer() {
                     className="group flex items-center text-gray-600 hover:text-blue-600 transition-all duration-300 transform hover:translate-x-2"
                   >
                     <span className="mr-3 group-hover:scale-110 transition-transform">{link.icon}</span>
-                    <span className="group-hover:font-medium">{link.name}</span>
+                    <span className="group-hover:font-medium text-xs sm:text-sm">{link.name}</span>
                   </Link>
                 ))}
               </div>
@@ -137,7 +137,7 @@ export default function Footer() {
 
             {/* Services */}
             <div>
-              <h4 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-gray-800 flex items-center">
+              <h4 className="text-sm sm:text-base font-bold mb-4 sm:mb-6 text-gray-800 flex items-center">
                 <span className="w-1 h-4 sm:h-6 bg-gradient-to-b from-purple-400 to-indigo-400 rounded-full mr-2 sm:mr-3"></span>
                 Services
               </h4>
@@ -152,7 +152,7 @@ export default function Footer() {
                 ].map((service, index) => (
                   <div key={index} className="group flex items-center text-gray-600 hover:text-gray-800 transition-colors cursor-pointer">
                     <span className="text-lg mr-3 group-hover:scale-110 transition-transform">{service.icon}</span>
-                    <span className="group-hover:font-medium">{service.name}</span>
+                    <span className="group-hover:font-medium text-xs sm:text-sm">{service.name}</span>
                   </div>
                 ))}
               </div>
@@ -160,55 +160,38 @@ export default function Footer() {
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-xl font-bold mb-6 text-gray-800 flex items-center">
-                <span className="w-1 h-6 bg-gradient-to-b from-indigo-400 to-blue-400 rounded-full mr-3"></span>
+              <h4 className="text-sm sm:text-base font-bold mb-4 sm:mb-6 text-gray-800 flex items-center">
+                <span className="w-1 h-4 sm:h-6 bg-gradient-to-b from-indigo-400 to-blue-400 rounded-full mr-2 sm:mr-3"></span>
                 Contact
               </h4>
-              <div className="space-y-5">
-                <div className="group flex items-start">
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-3 rounded-xl mr-4 mt-1 group-hover:scale-110 transition-transform">
-                    <FaPhone className="text-sm text-white" />
-                  </div>
-                  <div>
-                    <p className="text-gray-500 text-sm mb-1">24/7 Support</p>
-                    <a href="tel:+919558281589" className="text-gray-800 hover:text-blue-600 transition-colors font-medium">
-                      +91 9558281589
-                    </a>
-                  </div>
+              <div className="space-y-2 sm:space-y-3">
+                <div className="group flex items-center text-gray-600 hover:text-blue-600 transition-all duration-300">
+                  <span className="mr-3 group-hover:scale-110 transition-transform">📞</span>
+                  <a href="tel:+919558281589" className="group-hover:font-medium text-xs sm:text-sm">
+                    +91 9558281589
+                  </a>
                 </div>
                 
-                <div className="group flex items-start">
-                  <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-3 rounded-xl mr-4 mt-1 group-hover:scale-110 transition-transform">
-                    <FaEnvelope className="text-sm text-white" />
-                  </div>
-                  <div>
-                    <p className="text-gray-500 text-sm mb-1">Email Us</p>
-                    <a href="mailto:finethreadindia@gmail.com" className="text-gray-800 hover:text-blue-600 transition-colors font-medium break-all">
-                      finethreadindia@gmail.com
-                    </a>
-                  </div>
+                <div className="group flex items-center text-gray-600 hover:text-blue-600 transition-all duration-300">
+                  <span className="mr-3 group-hover:scale-110 transition-transform">📧</span>
+                  <a href="mailto:finethreadindia@gmail.com" className="group-hover:font-medium text-xs sm:text-sm break-all">
+                    finethreadindia@gmail.com
+                  </a>
                 </div>
                 
-                <div className="group flex items-start">
-                  <div className="bg-gradient-to-r from-indigo-500 to-blue-500 p-3 rounded-xl mr-4 mt-1 group-hover:scale-110 transition-transform">
-                    <FaMapMarkerAlt className="text-sm text-white" />
-                  </div>
-                  <div>
-                    <p className="text-gray-500 text-sm mb-1">Headquarters</p>
-                    <address className="text-gray-800 not-italic leading-relaxed">
-                      Fine Thread India<br />
-                      Ahmedabad, Gujarat<br />
-                      India 🇮🇳
-                    </address>
-                  </div>
+                <div className="group flex items-center text-gray-600 hover:text-gray-800 transition-colors cursor-pointer">
+                  <span className="mr-3 group-hover:scale-110 transition-transform">📍</span>
+                  <span className="group-hover:font-medium text-xs sm:text-sm">
+                    Ahmedabad, Gujarat 🇮🇳
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Social & Features */}
             <div>
-              <h4 className="text-xl font-bold mb-6 text-gray-800 flex items-center">
-                <span className="w-1 h-6 bg-gradient-to-b from-pink-400 to-red-400 rounded-full mr-3"></span>
+              <h4 className="text-sm sm:text-base font-bold mb-4 sm:mb-6 text-gray-800 flex items-center">
+                <span className="w-1 h-4 sm:h-6 bg-gradient-to-b from-pink-400 to-red-400 rounded-full mr-2 sm:mr-3"></span>
                 Connect
               </h4>
               
@@ -251,7 +234,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-700 bg-gradient-to-r from-slate-900 to-blue-900 backdrop-blur-sm">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2">
             <div className="flex flex-col lg:flex-row justify-between items-center space-y-3 sm:space-y-4 lg:space-y-0">
               <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6">
                 <p className="text-white flex items-center text-xs sm:text-sm text-center lg:text-left">
@@ -270,7 +253,7 @@ export default function Footer() {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-4">
                 <div className="flex space-x-4 text-sm">
                   <Link href="/privacy" className="text-blue-300 hover:text-white transition-colors hover:underline">
                     Privacy
@@ -282,6 +265,12 @@ export default function Footer() {
                     Sitemap
                   </Link>
                 </div>
+                <a 
+                  href="https://wa.me/919558281589"
+                  className="group bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 p-3 rounded-full transition-all duration-300 transform hover:scale-110 hover:shadow-2xl"
+                >
+                  <FaWhatsapp className="text-sm group-hover:animate-bounce text-white" />
+                </a>
                 <button 
                   onClick={scrollToTop}
                   className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 p-3 rounded-full transition-all duration-300 transform hover:scale-110 hover:shadow-2xl"
