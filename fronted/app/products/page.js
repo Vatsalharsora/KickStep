@@ -1,27 +1,45 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaFilter, FaSearch, FaShoppingCart, FaShoppingBag, FaPhone } from 'react-icons/fa'
 
-const products = [
-  { id: 1, name: 'Corporate Cotton Tee', price: 12.99, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400', category: 'cotton', color: 'white' },
-  { id: 2, name: 'Premium Polo Shirt', price: 18.99, image: 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400', category: 'polo', color: 'blue' },
-  { id: 3, name: 'Executive Dress Shirt', price: 24.99, image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400', category: 'dress', color: 'white' },
-  { id: 4, name: 'Casual Work Tee', price: 14.99, image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400', category: 'cotton', color: 'gray' },
-  { id: 5, name: 'Sports Team Jersey', price: 22.99, image: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400', category: 'sports', color: 'red' },
-  { id: 6, name: 'Uniform Polo', price: 16.99, image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400', category: 'polo', color: 'navy' },
-  { id: 7, name: 'Event Staff Tee', price: 13.99, image: 'https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=400', category: 'cotton', color: 'black' },
-  { id: 8, name: 'Manager Polo', price: 19.99, image: 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400', category: 'polo', color: 'white' },
-  { id: 9, name: 'Security Uniform', price: 21.99, image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400', category: 'uniform', color: 'black' },
-  { id: 10, name: 'School Spirit Tee', price: 15.99, image: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400', category: 'cotton', color: 'green' }
-]
-
 export default function ProductsPage() {
-  const [filteredProducts, setFilteredProducts] = useState(products)
+  const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
   const [filters, setFilters] = useState({ category: '', color: '', priceRange: '' })
   const [searchTerm, setSearchTerm] = useState('')
   const [addedMessage, setAddedMessage] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:3003/api/admin/v1/products')
+      const data = await response.json()
+      if (data.success) {
+        const formattedProducts = data.products.map(product => ({
+          id: product._id,
+          name: product.title,
+          price: product.variants?.[0]?.price || 0,
+          image: product.images?.[0] || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400',
+          category: product.category?.name || 'general',
+          color: product.variants?.[0]?.color || 'default',
+          description: product.description,
+          material: product.material
+        }))
+        setProducts(formattedProducts)
+        setFilteredProducts(formattedProducts)
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const addToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
@@ -193,6 +211,12 @@ export default function ProductsPage() {
         </div>
 
         {/* Products Grid */}
+        {loading ? (
+          <div className="text-center py-16">
+            <div className="text-6xl text-gray-300 mb-4">⏳</div>
+            <h3 className="text-2xl font-bold text-gray-600 mb-2">Loading products...</h3>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {filteredProducts.map((product) => (
             <div key={product.id} className="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-white/50">
@@ -283,6 +307,7 @@ export default function ProductsPage() {
             </div>
           ))}
         </div>
+        )}
         
         {filteredProducts.length === 0 && (
           <div className="text-center py-16">

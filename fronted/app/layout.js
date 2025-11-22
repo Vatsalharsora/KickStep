@@ -1,20 +1,19 @@
+'use client'
 import './globals.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-
-export const metadata = {
-  title: 'KICKSTEP - Premium Corporate T-Shirts & Uniforms',
-  description: 'Your partner in premium corporate t-shirts and bulk uniform orders. Quality, customization, and fast delivery for businesses.',
-  keywords: 'corporate t-shirts, bulk orders, uniforms, custom printing, embroidery',
-}
+import { usePathname } from 'next/navigation'
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname()
+  const isAdminPage = pathname?.startsWith('/admin-portal-2024')
+
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <main className="pt-24">{children}</main>
-        <Footer />
+        {!isAdminPage && <Navbar />}
+        <main className={isAdminPage ? '' : 'pt-24'}>{children}</main>
+        {!isAdminPage && <Footer />}
       </body>
     </html>
   )

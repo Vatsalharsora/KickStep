@@ -18,12 +18,11 @@ const secret = "ankit"
 const vaildateuser = (req,res,next) =>{
     var token = req.headers.authorization;
     if(token){
-
         if(token.startsWith("Bearer ")){
-
             token = token.split(" ")[1]
             try{
                 const user = jwt.verify(token,secret)
+                req.user = user
                 next()
             }catch(err)
             {
